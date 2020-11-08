@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Pokedex 3.0</title>
+    <title>Pokedex</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,26 +24,27 @@
           $(document).ready(function(){
                url = 'https://pokeapi.co/api/v2/pokemon/';
                getPokemons(url);
-		$('#myModal').on('shown.bs.modal', function () {
-  			$('#myInput').trigger('focus')
-		})
+		
                function getPokemons(url){
                     $.ajax(url).done(function(res){
                         pokemonList(res.results);
                         $('#more-pokemons').attr('data-next', res.next);
                     });
                };
-                 //realizar nueva petiion a traves del boton para traer mas pokemones
                $('#more-pokemons').click(function(){
                    getPokemons(this.dataset.next)
                }) 
-                 //mostrar pokemones
+               
                function pokemonList(pokemonData){
+               	
                     pokemonData.forEach(function(pokemon){
+                    	$('#myModal').on('shown.bs.modal', function () {
+  				$('#myInput').trigger('focus')
+			})
                         $('#pokemons').append(
                             '<div class="card m-3">'+
                                 '<div class="card-body">'+
-                                    '<h4 class="card-title">'+ pokemon.name +'</h4>'+'<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">'+ 'quiero sabr mas'+'</button>'+
+                                    '<h4 class="card-title">'+ pokemon.name +'</h4>'+'<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="modal" >'+ 'quiero sabr mas'+'</button>'+
 
 '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
   '<div class="modal-dialog">'+
